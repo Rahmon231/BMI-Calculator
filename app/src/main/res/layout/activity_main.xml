@@ -117,10 +117,10 @@
             android:id="@+id/current_weight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="55"
-            android:textAlignment="center"
             android:layout_below="@id/text_weight"
+            android:layout_centerInParent="true"
+            android:text="0"
+            android:textAlignment="center"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -187,9 +187,9 @@
             android:id="@+id/current_age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="22"
             android:layout_below="@id/age"
+            android:layout_centerInParent="true"
+            android:text="0"
             android:textAlignment="center"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -255,7 +255,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:layout_marginBottom="50dp"
-            android:text="170"
+            android:text="0"
             android:textSize="40sp"
             android:textStyle="bold" />
 
@@ -286,10 +286,11 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="15dp"
+        android:background="@drawable/height_bg"
         android:text="Calculate BMI"
         android:textSize="15dp"
         android:textStyle="bold"
-
+        android:id="@+id/calculate_bmi"
         />
 
 </RelativeLayout>
