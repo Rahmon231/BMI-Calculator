@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class MainActivity extends AppCompatActivity{
     private SeekBar height_seek;
     private TextView currentHeight,currentWeight, currentAge;
@@ -19,6 +22,9 @@ public class MainActivity extends AppCompatActivity{
     private int height = 0;
     private int age = 0;
     private int weight = 0 ;
+    private FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    private CollectionReference dbRef  = firestore.collection("BMI Metrics");
+    private Metrics metrics = new Metrics();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +48,7 @@ public class MainActivity extends AppCompatActivity{
                     height = i;
                     Log.d("TAG", "onProgressChanged: " + i);
                     currentHeight.setText(String.valueOf(height));
-
+                    metrics.setHeight(height);
                 }
             }
 
@@ -58,25 +64,40 @@ public class MainActivity extends AppCompatActivity{
         });
         incrementAge.setOnClickListener(view -> {
             age++;
+            metrics.setAge(age);
             currentAge.setText(String.valueOf(age));
         });
         decrementAge.setOnClickListener(view -> {
             if(age!=0){
                 age--;
             }
+            metrics.setAge(age);
             currentAge.setText(String.valueOf(age));
         });
         incrementWeight.setOnClickListener(view -> {
             weight++;
+            metrics.setWeight(weight);
             currentWeight.setText(String.valueOf(weight));
         });
         decrementWeight.setOnClickListener(view -> {
             if(weight!=0){
                 weight--;
             }
+            metrics.setWeight(weight);
             currentWeight.setText(String.valueOf(weight));
         });
-        calc_bmi.setOnClickListener(view -> getBMI());
+        calc_bmi.setOnClickListener(view -> {
+            getBMI();
+            saveData();
+        });
+    }
+
+    private void saveData() {
+        int age = Integer.parseInt(currentAge.getText().toString());
+        int weight = Integer.parseInt(currentWeight.getText().toString());
+        int height = metrics.getHeight();
+        Metrics metric = new Metrics(weight,height,age);
+       dbRef.add(metric);
     }
 
     private double getBMI() {
