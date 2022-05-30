@@ -2,7 +2,9 @@ package com.lemzeeyyy.bmicalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -106,4 +108,21 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ProgressDialog progressDialog = ProgressDialog.show(MainActivity.this,"please wait",
+                "processing",true);
+        CountDownTimer timer = new CountDownTimer(2000,1000) {
+            @Override
+            public void onTick(long l) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                progressDialog.dismiss();
+            }
+        }.start();
+    }
 }
