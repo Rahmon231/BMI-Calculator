@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BMICalculator">
         <activity
+            android:name=".BMIResultActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashScreen"
             android:exported="false" />
         <activity

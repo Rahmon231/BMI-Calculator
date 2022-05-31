@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/height_bg.xml" value="0.1195" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.195" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.10416666666666667" />
       </map>
     </option>
   </component>
