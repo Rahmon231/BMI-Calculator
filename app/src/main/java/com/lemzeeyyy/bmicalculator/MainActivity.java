@@ -3,6 +3,7 @@ package com.lemzeeyyy.bmicalculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -15,15 +16,17 @@ import android.widget.TextView;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DecimalFormat;
+
 public class MainActivity extends AppCompatActivity{
     private SeekBar height_seek;
     private TextView currentHeight,currentWeight, currentAge;
     private ImageView incrementAge, incrementWeight, decrementAge, decrementWeight;
     private Button calc_bmi;
     private double bmi = 0 ;
-    private int height = 0;
+    private double height = 0;
     private int age = 0;
-    private int weight = 0 ;
+    private double weight = 0 ;
     private FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     private CollectionReference dbRef  = firestore.collection("BMI Metrics");
     private Metrics metrics = new Metrics();
@@ -47,8 +50,8 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 if(b) {
-                    height = i;
-                    Log.d("TAG", "onProgressChanged: " + i);
+                    height = (double) i;
+                    //Log.d("TAG", "onProgressChanged: " + i);
                     currentHeight.setText(String.valueOf(height));
                     metrics.setHeight(height);
                 }
@@ -91,20 +94,27 @@ public class MainActivity extends AppCompatActivity{
         calc_bmi.setOnClickListener(view -> {
             getBMI();
             saveData();
+            Intent intent = new Intent(MainActivity.this,BMIResultActivity.class);
+            intent.putExtra("BMI",getBMI());
+            startActivity(intent);
+            //intent.putExtra("GENDER",)
         });
     }
 
     private void saveData() {
         int age = Integer.parseInt(currentAge.getText().toString());
-        int weight = Integer.parseInt(currentWeight.getText().toString());
-        int height = metrics.getHeight();
+        double weight = Double.parseDouble(currentWeight.getText().toString());
+        double height = metrics.getHeight();
         Metrics metric = new Metrics(weight,height,age);
-       dbRef.add(metric);
+
     }
 
     private double getBMI() {
+        bmi = (metrics.getWeight()/Math.pow(metrics.getHeight(),2));
 
-        return bmi;
+        //Log.d("TAG", "getBMI: "+bmi);
+
+        return Double.parseDouble(new DecimalFormat("#0.000").format(bmi));
 
     }
 
@@ -113,7 +123,7 @@ public class MainActivity extends AppCompatActivity{
         super.onStart();
         ProgressDialog progressDialog = ProgressDialog.show(MainActivity.this,"please wait",
                 "processing",true);
-        CountDownTimer timer = new CountDownTimer(2000,1000) {
+        CountDownTimer timer = new CountDownTimer(1000,1000) {
             @Override
             public void onTick(long l) {
 

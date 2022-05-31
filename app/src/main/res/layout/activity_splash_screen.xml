@@ -16,13 +16,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/appname"
         android:layout_below="@+id/logo"
         android:layout_centerInParent="true"
         android:layout_marginTop="20dp"
+        android:background="@drawable/height_bg"
         android:fontFamily="@font/raleway_dots"
         android:lineSpacingExtra="2dp"
         android:text="BMI CALCULATOR"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />
+
 </RelativeLayout>

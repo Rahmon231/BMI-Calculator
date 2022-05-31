@@ -280,6 +280,7 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/calculate_bmi"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
@@ -289,8 +290,6 @@
         android:background="@drawable/height_bg"
         android:text="Calculate BMI"
         android:textSize="15dp"
-        android:textStyle="bold"
-        android:id="@+id/calculate_bmi"
-        />
+        android:textStyle="bold" />
 
 </RelativeLayout>

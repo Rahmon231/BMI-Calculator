@@ -1,32 +1,32 @@
 package com.lemzeeyyy.bmicalculator;
 
 public class Metrics {
-    private int weight;
-    private int height;
+    private double weight;
+    private double height;
     private int age;
 
     public Metrics() {
     }
 
-    public Metrics(int weight, int height, int age) {
+    public Metrics(double weight, double height, int age) {
         this.weight = weight;
         this.height = height;
         this.age = age;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 
