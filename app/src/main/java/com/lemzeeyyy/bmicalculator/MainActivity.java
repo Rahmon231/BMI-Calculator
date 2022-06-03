@@ -1,6 +1,7 @@
 package com.lemzeeyyy.bmicalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -27,14 +28,15 @@ public class MainActivity extends AppCompatActivity{
     private double height = 0;
     private int age = 0;
     private double weight = 0 ;
-    private FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-    private CollectionReference dbRef  = firestore.collection("BMI Metrics");
     private Metrics metrics = new Metrics();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         height_seek = findViewById(R.id.seek_height);
         height_seek.setMax(200);
         currentHeight = findViewById(R.id.current_height);
@@ -50,8 +52,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 if(b) {
-                    height = (double) i;
-                    //Log.d("TAG", "onProgressChanged: " + i);
+                    height = i;
                     currentHeight.setText(String.valueOf(height));
                     metrics.setHeight(height);
                 }

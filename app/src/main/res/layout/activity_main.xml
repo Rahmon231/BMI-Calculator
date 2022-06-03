@@ -5,9 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/black">
+    android:background="#0A0E21">
 
-    <RelativeLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.BMICalculator.NoActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/purple_50"
+            android:gravity="center"
+            app:popupTheme="@style/Theme.BMICalculator.PopupOverlay"
+            app:titleTextColor="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+       <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -40,7 +55,8 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="36dp"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/ic_baseline_boy_24" />
 
         <TextView
             android:id="@+id/text_male"
@@ -50,6 +66,7 @@
             android:layout_marginBottom="10dp"
             android:text="Male"
             android:textAlignment="center"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold" />
     </RelativeLayout>
@@ -72,6 +89,7 @@
         <ImageView
             android:layout_width="170px"
             android:layout_height="170px"
+            android:src="@drawable/ic_baseline_pregnant_woman_24"
             android:layout_above="@+id/text_female"
             android:layout_centerInParent="true"
             android:layout_marginBottom="20dp" />
@@ -83,6 +101,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="10dp"
             android:text="Female"
+            android:textColor="#FFFFFF"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -109,6 +128,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="Weight"
+            android:textColor="#FFFFFF"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -118,6 +138,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/text_weight"
+            android:textColor="#FFFFFF"
             android:layout_centerInParent="true"
             android:text="0"
             android:textAlignment="center"
@@ -135,6 +156,7 @@
                 android:id="@+id/decrement_weight"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:background="#FFFFFF"
                 android:src="@drawable/ic_baseline_remove_circle_24" />
         </RelativeLayout>
 
@@ -149,6 +171,7 @@
             <ImageView
                 android:id="@+id/increment_weight"
                 android:layout_width="30dp"
+                android:background="#FFFFFF"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_baseline_add_circle_24" />
 
@@ -179,6 +202,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="Age"
+            android:textColor="#FFFFFF"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -190,6 +214,7 @@
             android:layout_below="@id/age"
             android:layout_centerInParent="true"
             android:text="0"
+            android:textColor="#FFFFFF"
             android:textAlignment="center"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -204,6 +229,7 @@
             <ImageView
                 android:id="@+id/decrement_age"
                 android:layout_width="30dp"
+                android:background="#FFFFFF"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_baseline_remove_circle_24" />
 
@@ -221,6 +247,7 @@
                 android:id="@+id/increment_age"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:background="#FFFFFF"
                 android:src="@drawable/ic_baseline_add_circle_24" />
         </RelativeLayout>
     </RelativeLayout>
@@ -245,6 +272,7 @@
             android:layout_marginTop="15dp"
             android:text="Height"
             android:textAlignment="center"
+            android:textColor="#FFFFFF"
             android:textSize="28sp"
             android:textStyle="bold" />
 
@@ -256,6 +284,7 @@
             android:layout_centerInParent="true"
             android:layout_marginBottom="50dp"
             android:text="0"
+            android:textColor="#FFFFFF"
             android:textSize="40sp"
             android:textStyle="bold" />
 
@@ -267,6 +296,7 @@
             android:layout_marginBottom="50dp"
             android:layout_toEndOf="@id/current_height"
             android:text="cm"
+            android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
         <SeekBar
@@ -287,8 +317,9 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/height_bg"
+        android:background="@drawable/button_bg"
         android:text="Calculate BMI"
+        android:textColor="#FFFFFF"
         android:textSize="15dp"
         android:textStyle="bold" />
 

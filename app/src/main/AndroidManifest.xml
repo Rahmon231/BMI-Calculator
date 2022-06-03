@@ -11,13 +11,17 @@
         android:theme="@style/Theme.BMICalculator">
         <activity
             android:name=".BMIResultActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.BMICalculator.NoActionBar"
+            />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:theme="@style/Theme.BMICalculator.NoActionBar"/>
             <activity
                 android:name=".SplashScreen"
-                android:exported="true">
+                android:exported="true"
+                android:theme="@style/Theme.BMICalculator.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

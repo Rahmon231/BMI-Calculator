@@ -10,7 +10,7 @@ import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
 public class BMIResultActivity extends AppCompatActivity {
-    private TextView bmiResult,gender;
+    private TextView bmiResult,gender,bmi_category;
     private Button reCalculate;
 
 
@@ -21,8 +21,24 @@ public class BMIResultActivity extends AppCompatActivity {
         bmiResult = findViewById(R.id.bmi_result);
         reCalculate = findViewById(R.id.re_calculate_bmi);
         gender = findViewById(R.id.gender_display);
+        bmi_category = findViewById(R.id.bmi_category);
         double bmi = getIntent().getDoubleExtra("BMI",0);
         String.format("%.2f",bmi);
+        if(bmi < 18.5){
+            //underweight
+            bmi_category.setText("your bmi category is underweight");
+        }
+        else if(bmi >18.5 && bmi < 24.9){
+            //normal
+            bmi_category.setText("your bmi category is normal");
+        }else if(bmi > 25.00 && bmi < 29.9){
+            //overweight
+            bmi_category.setText("your bmi category is overweight");
+        }else {
+            //obese
+            bmi_category.setText("your bmi category is obese");
+        }
+
         bmiResult.setText(String.valueOf(bmi));
         reCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
