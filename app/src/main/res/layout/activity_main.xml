@@ -89,10 +89,10 @@
         <ImageView
             android:layout_width="170px"
             android:layout_height="170px"
-            android:src="@drawable/ic_baseline_pregnant_woman_24"
             android:layout_above="@+id/text_female"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/ic_baseline_pregnant_woman_24" />
 
         <TextView
             android:id="@+id/text_female"
@@ -101,8 +101,8 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="10dp"
             android:text="Female"
-            android:textColor="#FFFFFF"
             android:textAlignment="center"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold" />
     </RelativeLayout>
@@ -156,7 +156,6 @@
                 android:id="@+id/decrement_weight"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="#FFFFFF"
                 android:src="@drawable/ic_baseline_remove_circle_24" />
         </RelativeLayout>
 
@@ -171,7 +170,6 @@
             <ImageView
                 android:id="@+id/increment_weight"
                 android:layout_width="30dp"
-                android:background="#FFFFFF"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_baseline_add_circle_24" />
 
@@ -229,7 +227,6 @@
             <ImageView
                 android:id="@+id/decrement_age"
                 android:layout_width="30dp"
-                android:background="#FFFFFF"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_baseline_remove_circle_24" />
 
@@ -247,7 +244,6 @@
                 android:id="@+id/increment_age"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="#FFFFFF"
                 android:src="@drawable/ic_baseline_add_circle_24" />
         </RelativeLayout>
     </RelativeLayout>

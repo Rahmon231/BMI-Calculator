@@ -2,7 +2,6 @@ package com.lemzeeyyy.bmicalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,17 +11,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DecimalFormat;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private SeekBar height_seek;
-    private TextView currentHeight,currentWeight, currentAge;
+    private TextView currentHeight,currentWeight, currentAge,maleText,femaleText;
     private ImageView incrementAge, incrementWeight, decrementAge, decrementWeight;
     private Button calc_bmi;
     private double bmi = 0 ;
@@ -30,6 +28,8 @@ public class MainActivity extends AppCompatActivity{
     private int age = 0;
     private double weight = 0 ;
     private Metrics metrics = new Metrics();
+    private Handler mHandler = new Handler();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        femaleText = findViewById(R.id.text_female);
+        maleText = findViewById(R.id.text_male);
 
         height_seek = findViewById(R.id.seek_height);
         height_seek.setMax(200);
@@ -93,6 +95,37 @@ public class MainActivity extends AppCompatActivity{
             metrics.setWeight(weight);
             currentWeight.setText(String.valueOf(weight));
         });
+
+
+        incrementWeight.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                mHandler.postDelayed(incrementRunnable, 0);
+                return true;
+            }
+        });
+        decrementWeight.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                mHandler.postDelayed(incrementRunnable, 0);
+                return true;
+            }
+        });
+        incrementAge.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                mHandler.postDelayed(incrementRunnable, 0); // initial call for our handler.
+                return true;
+            }
+        });
+        decrementAge.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                mHandler.postDelayed(incrementRunnable, 0); // initial call for our handler.
+                return true;
+            }
+        });
+
         calc_bmi.setOnClickListener(view -> {
             getBMI();
             saveData();
@@ -101,103 +134,9 @@ public class MainActivity extends AppCompatActivity{
             startActivity(intent);
             //intent.putExtra("GENDER",)
         });
+        RelativeLayout male = findViewById(R.id.male);
+        RelativeLayout female = findViewById(R.id.female);
 
-        incrementAge.setOnLongClickListener(new View.OnLongClickListener() {
-            private Handler mHandler =new Handler();
-            private Runnable incrementRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    mHandler.removeCallbacks(incrementRunnable);
-                    if(incrementAge.isPressed()) {
-                        // increment the counter
-                        // display the updated value here, if necessary
-                        age++;
-                        metrics.setAge(age);
-                        currentAge.setText(String.valueOf(age));
-                        mHandler.postDelayed(incrementRunnable, 100);
-                    }
-                }
-            };
-
-            @Override
-            public boolean onLongClick(View view) {
-                mHandler.postDelayed(incrementRunnable, 0);
-                return true;
-            }
-        });
-        decrementAge.setOnLongClickListener(new View.OnLongClickListener() {
-            private Handler mHandler =new Handler();
-            private Runnable decrementRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    mHandler.removeCallbacks(decrementRunnable);
-                    if(decrementAge.isPressed()) {
-                        // increment the counter
-                        // display the updated value here, if necessary
-                        if(age!=0){
-                            age--;
-                        }
-                        metrics.setAge(age);
-                        currentAge.setText(String.valueOf(age));
-                        mHandler.postDelayed(decrementRunnable, 100);
-                    }
-                }
-            };
-
-            @Override
-            public boolean onLongClick(View view) {
-                mHandler.postDelayed(decrementRunnable, 0);
-                return true;
-            }
-        });
-        incrementWeight.setOnLongClickListener(new View.OnLongClickListener() {
-            private Handler mHandler =new Handler();
-            private Runnable incrementRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    mHandler.removeCallbacks(incrementRunnable);
-                    if(incrementWeight.isPressed()) {
-                        // increment the counter
-                        // display the updated value here, if necessary
-                        weight++;
-                        metrics.setWeight(weight);
-                        currentWeight.setText(String.valueOf(weight));
-                        mHandler.postDelayed(incrementRunnable, 100);
-                    }
-                }
-            };
-
-            @Override
-            public boolean onLongClick(View view) {
-                mHandler.postDelayed(incrementRunnable, 0);
-                return true;
-            }
-        });
-        decrementWeight.setOnLongClickListener(new View.OnLongClickListener() {
-            private Handler mHandler =new Handler();
-            private Runnable decrementRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    mHandler.removeCallbacks(decrementRunnable);
-                    if(decrementWeight.isPressed()) {
-                        // increment the counter
-                        // display the updated value here, if necessary
-                        if(weight!=0){
-                            weight--;
-                        }
-                        metrics.setWeight(weight);
-                        currentWeight.setText(String.valueOf(weight));
-                        mHandler.postDelayed(decrementRunnable, 100);
-                    }
-                }
-            };
-
-            @Override
-            public boolean onLongClick(View view) {
-                mHandler.postDelayed(decrementRunnable, 0);
-                return true;
-            }
-        });
     }
 
     private void saveData() {
@@ -209,7 +148,11 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private double getBMI() {
-        bmi = (metrics.getWeight()/Math.pow(metrics.getHeight(),2));
+        bmi = (10000.0)*(metrics.getWeight()/Math.pow(metrics.getHeight(),2));
+        Log.d("TAG", "weight: "+metrics.getWeight());
+        Log.d("TAG", "age: "+metrics.getAge());
+        Log.d("TAG", "height: "+metrics.getHeight());
+        Log.d("TAG", "getBMI: "+Double.parseDouble(new DecimalFormat("#0.000").format(bmi)));
 
         //Log.d("TAG", "getBMI: "+bmi);
 
@@ -234,4 +177,56 @@ public class MainActivity extends AppCompatActivity{
             }
         }.start();
     }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        switch (v.getId()){
+            case R.id.male:
+                intent.putExtra("male","Male");
+                break;
+
+            case R.id.female:
+                intent.putExtra("female","Female");
+                break;
+        }
+    }
+
+    private Runnable incrementRunnable = new Runnable() {
+        @Override
+        public void run() {
+            mHandler.removeCallbacks(incrementRunnable); // remove our old runnable, though I'm not really sure if this is necessary
+            if(incrementAge.isPressed()) { // check if the button is still in its pressed state
+                // increment the counter
+                // display the updated value here, if necessary
+                age++;
+                metrics.setAge(age);
+                currentAge.setText(String.valueOf(age));
+                mHandler.postDelayed(incrementRunnable, 100); // call for a delayed re-check of the button's state through our handler. The delay of 100ms can be changed as needed.
+            }else if(decrementAge.isPressed()){
+                if(age!=0){
+                    age--;
+                }
+                metrics.setAge(age);
+                currentAge.setText(String.valueOf(age));
+                mHandler.postDelayed(incrementRunnable, 100);
+            }else if(incrementWeight.isPressed()){
+                weight++;
+                metrics.setWeight(weight);
+                currentWeight.setText(String.valueOf(weight));
+                mHandler.postDelayed(incrementRunnable, 100);
+            }
+            else if(decrementWeight.isPressed()){
+                if(weight!=0){
+                    weight--;
+                }
+                metrics.setWeight(weight);
+                currentWeight.setText(String.valueOf(weight));
+                mHandler.postDelayed(incrementRunnable, 100);
+            }
+            else{
+                //do notthing
+            }
+        }
+    };
 }

@@ -8,18 +8,19 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/height_bg" />
+        android:src="@drawable/bmipic"
+        />
 
     <TextView
+        android:id="@+id/appname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/appname"
         android:layout_below="@+id/logo"
         android:layout_centerInParent="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/height_bg"
         android:fontFamily="@font/raleway_dots"
         android:lineSpacingExtra="2dp"
