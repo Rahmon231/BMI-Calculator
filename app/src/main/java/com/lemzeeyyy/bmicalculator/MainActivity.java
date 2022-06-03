@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -99,6 +100,103 @@ public class MainActivity extends AppCompatActivity{
             intent.putExtra("BMI",getBMI());
             startActivity(intent);
             //intent.putExtra("GENDER",)
+        });
+
+        incrementAge.setOnLongClickListener(new View.OnLongClickListener() {
+            private Handler mHandler =new Handler();
+            private Runnable incrementRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    mHandler.removeCallbacks(incrementRunnable);
+                    if(incrementAge.isPressed()) {
+                        // increment the counter
+                        // display the updated value here, if necessary
+                        age++;
+                        metrics.setAge(age);
+                        currentAge.setText(String.valueOf(age));
+                        mHandler.postDelayed(incrementRunnable, 100);
+                    }
+                }
+            };
+
+            @Override
+            public boolean onLongClick(View view) {
+                mHandler.postDelayed(incrementRunnable, 0);
+                return true;
+            }
+        });
+        decrementAge.setOnLongClickListener(new View.OnLongClickListener() {
+            private Handler mHandler =new Handler();
+            private Runnable decrementRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    mHandler.removeCallbacks(decrementRunnable);
+                    if(decrementAge.isPressed()) {
+                        // increment the counter
+                        // display the updated value here, if necessary
+                        if(age!=0){
+                            age--;
+                        }
+                        metrics.setAge(age);
+                        currentAge.setText(String.valueOf(age));
+                        mHandler.postDelayed(decrementRunnable, 100);
+                    }
+                }
+            };
+
+            @Override
+            public boolean onLongClick(View view) {
+                mHandler.postDelayed(decrementRunnable, 0);
+                return true;
+            }
+        });
+        incrementWeight.setOnLongClickListener(new View.OnLongClickListener() {
+            private Handler mHandler =new Handler();
+            private Runnable incrementRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    mHandler.removeCallbacks(incrementRunnable);
+                    if(incrementWeight.isPressed()) {
+                        // increment the counter
+                        // display the updated value here, if necessary
+                        weight++;
+                        metrics.setWeight(weight);
+                        currentWeight.setText(String.valueOf(weight));
+                        mHandler.postDelayed(incrementRunnable, 100);
+                    }
+                }
+            };
+
+            @Override
+            public boolean onLongClick(View view) {
+                mHandler.postDelayed(incrementRunnable, 0);
+                return true;
+            }
+        });
+        decrementWeight.setOnLongClickListener(new View.OnLongClickListener() {
+            private Handler mHandler =new Handler();
+            private Runnable decrementRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    mHandler.removeCallbacks(decrementRunnable);
+                    if(decrementWeight.isPressed()) {
+                        // increment the counter
+                        // display the updated value here, if necessary
+                        if(weight!=0){
+                            weight--;
+                        }
+                        metrics.setWeight(weight);
+                        currentWeight.setText(String.valueOf(weight));
+                        mHandler.postDelayed(decrementRunnable, 100);
+                    }
+                }
+            };
+
+            @Override
+            public boolean onLongClick(View view) {
+                mHandler.postDelayed(decrementRunnable, 0);
+                return true;
+            }
         });
     }
 
