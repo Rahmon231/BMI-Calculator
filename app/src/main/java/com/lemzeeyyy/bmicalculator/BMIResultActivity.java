@@ -41,6 +41,7 @@ public class BMIResultActivity extends AppCompatActivity {
         }
 
         bmiResult.setText(String.valueOf(bmi));
+
         Log.d("TAG", "onCreate: "+getIntent().getStringExtra("male"));
         Log.d("TAG", "onCreate: "+getIntent().getStringExtra("female"));
         reCalculate.setOnClickListener(new View.OnClickListener() {

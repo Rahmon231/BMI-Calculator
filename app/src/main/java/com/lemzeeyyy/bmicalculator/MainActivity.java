@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(MainActivity.this,BMIResultActivity.class);
             intent.putExtra("BMI",getBMI());
             startActivity(intent);
-            //intent.putExtra("GENDER",)
+
         });
         RelativeLayout male = findViewById(R.id.male);
         RelativeLayout female = findViewById(R.id.female);
@@ -154,7 +154,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("TAG", "height: "+metrics.getHeight());
         Log.d("TAG", "getBMI: "+Double.parseDouble(new DecimalFormat("#0.000").format(bmi)));
 
-        //Log.d("TAG", "getBMI: "+bmi);
 
         return Double.parseDouble(new DecimalFormat("#0.000").format(bmi));
 
