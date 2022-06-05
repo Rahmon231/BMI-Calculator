@@ -24,7 +24,7 @@ public class SplashScreen extends AppCompatActivity {
         Animation anim = AnimationUtils.loadAnimation(this,R.anim.myanim);
         appName.setAnimation(anim);
 
-        CountDownTimer timer = new CountDownTimer(3000,1000) {
+        CountDownTimer timer = new CountDownTimer(1000,1000) {
             @Override
             public void onTick(long l) {
 
